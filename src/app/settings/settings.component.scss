@@ -1,0 +1,26 @@
+@use '../../sass/custom' as *;
+@use '../../sass/components/buttons' as *;
+@use '../../sass/components/mixins' as *;
+
+#sendMessage {
+    font-size: 1.1rem;
+    padding: 0.5rem 1.2rem;
+    text-decoration: none;
+    display: block;
+}
+
+.flash-message {
+    white-space: pre-wrap;
+}
+
+.add-credentials {
+    font-size: 2rem;
+}
+
+.active-scenario {
+    text-align: right;
+}
+
+.edit-credential {
+    cursor: pointer;
+}

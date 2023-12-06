@@ -1,0 +1,74 @@
+<div class="">
+    <h1 class="display-2 text-center">Scenario form</h1>
+    <div *ngIf="responseMsg" class="text-secondary response-message">
+        {{ responseMsg }}
+    </div>
+    <div class="credential">
+        <div class="form mb-3">
+            <label>Comany</label>
+            <input class="form-control" placeholder="company name" [ngModel]="company" required readonly>
+        </div>
+        <div class="form mb-3">
+            <label>Phone number ID</label>
+            <input class="form-control" placeholder="phone number id" [ngModel]="phoneNumberId" required readonly>
+        </div>
+    </div>
+    <div id="title">
+        <div class="input-group mb-3">
+            <input class="form-control" placeholder="scenario title" minlength="6">
+        </div>
+    </div>
+    <div class="scenario-conatiner">
+        <div #scenario class="scenario">
+            <div class="quest-resp" id="wrapper">
+                <div class="quest_wrapper">
+                    <div class="input-group mb-3">
+                        <button class="btn btn-outline-secondary" type="button" (click)="addResponse()">R</button>
+                        <textarea id="first-textarea"
+                                class="form-control"
+                                placeholder="your first question here"
+                                minlength="3"
+                                maxlength="1024">
+                        </textarea>
+                        <button class="btn btn-outline-secondary" type="button" disabled>
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="responses" id="first-responses"></div>
+                <!-- <div class="resp_wrapper">
+                    <div class="input-group mb-3">
+                        <button class="btn btn-outline-secondary" type="button">R</button>
+                        <input class="form-control" placeholder="your first response here">
+                        <button class="btn btn-outline-secondary" type="button">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    </div>
+                    <div class="questions">
+                        <div class="quest-resp"></div>
+                        <div class="quest-resp"></div>
+                    </div>
+                </div> -->
+                <!-- <div class="resp_wrapper">
+                    <div class="input-group mb-3">
+                        <button class="btn btn-outline-secondary" type="button">R</button>
+                        <input class="form-control" placeholder="your first response here">
+                        <button class="btn btn-outline-secondary" type="button">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    </div>
+                    <div class="questions">
+                        <div class="quest-resp"></div>
+                        <div class="quest-resp"></div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        <div id="add" class="px-1">
+            <i class="bi bi-plus-circle add-question plus" (click)="addQuestion()"></i>
+        </div>
+    </div>
+    <div class="submit">
+        <button type="button" class="btn btn-primary" (click)="getScenario()">Submit</button>
+    </div>
+</div>

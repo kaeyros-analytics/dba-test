@@ -1,0 +1,48 @@
+@use '../../sass/custom' as *;
+
+button {
+    padding-right: 0.9375rem;
+}
+
+.add-question {
+    font-size: 2.5rem;
+    cursor: pointer;
+    color: $secondary;
+}
+
+@keyframes input-shake {
+    25% {
+        transform: translateX(1%);
+    }
+    75% {
+        transform: translateX(-1%);
+    }
+}
+
+.form-control:not(:focus):invalid {
+    background-color: #b20a37;
+    color: white;
+    animation: input-shake 100ms ease-in-out 2;
+}
+
+.quest-resp {
+    width: 96%;
+    margin-left: auto;
+    margin-right: 0;
+    .resp_wrapper {
+        width: 96%;
+        margin-left: auto;
+        margin-right: 0;
+    }
+}
+.scenario-conatiner {
+    margin: 2rem auto;
+    display: flex;
+    .scenario {
+        width: 100%;
+    }
+}
+#title, .submit, .credential, .response-message {
+    margin: 2rem auto;
+    width: 92%;
+}

@@ -1,0 +1,155 @@
+<h1 class="display-2 text-center">Settings</h1>
+
+<div *ngIf="responseMsg" class="text-secondary response-message">
+    {{ responseMsg }}
+</div>
+
+<div class="active-scenario mx-3">
+    <span class="mx-3">Active scenario: <span *ngIf="activeScenario">{{ activeScenario.title }}</span></span>
+    <button type="button"
+        class="btn btn-outline border-secondary"
+        data-bs-toggle="modal"
+        data-bs-target="#activeScenarioModal">
+        Edit
+    </button>
+</div>
+
+<div class="settings mt-5">
+    <h3 class="display-5 text-center">Scenarios</h3>
+    <table class="table table-success table-striped mb-5">
+        <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Companies</th>
+              <th scope="col">Scenarios</th>
+              <th scope="col">Credentials</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let scenario of (backendScenario$ | async)?.data; let i = index">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ scenario.company }}</td>
+              <td>{{ scenario.title }}</td>
+              <td>
+                {{ scenario.phone_number_id }}
+              </td>
+            </tr>
+          </tbody>
+    </table>
+
+    <h3 class="display-5 text-center">
+        Credentials
+        <i class="bi bi-plus-square text-secondary add-credentials"
+            data-bs-toggle="modal"
+            data-bs-target="#credentialModal">
+        </i>
+    </h3>
+    <table class="table table-success table-striped">
+        <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Companies</th>
+              <th scope="col">Phone Number Id</th>
+              <th scope="col">Verify Token</th>
+              <th scope="col">Edit</th>
+              <th scope="col">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let credential of (backendCredentials$ | async)?.data; let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ credential.company }}</td>
+                <td>{{ credential.phone_number_id }}</td>
+                <td>{{ credential.verify_token }}</td>
+                <td>
+                    <span class="edit-credential"
+                        (click)="updateCredential(credential)"
+                        data-bs-toggle="modal"
+                        data-bs-target="#credentialModal">
+                        <i class="bi bi-pencil"></i>
+                    </span>
+                </td>
+                <td>
+                    <span class="edit-credential" (click)="deleteCredential(credential._id)"><i class="bi bi-trash"></i></span>
+                </td>
+              </tr>
+          </tbody>
+    </table>
+</div>
+
+<div class="modal fade text-dark" id="credentialModal" tabindex="-1" aria-labelledby="credentialModal" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-primary" id="credentialModalTitle">
+                    Save Credentials
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="credentialForm" (submit)="onSubmitCredentialFor()">
+                        <div class="form-group">
+                            <label for="company">Company</label>
+                            <input id="company" type="text" class="form-control" formControlName="company">
+                        </div>
+                        <div class="form-group my-3">
+                            <label for="phone_number_id">Phone number ID</label>
+                            <input id="phone_number_id" type="text" class="form-control" formControlName="phone_number_id">
+                        </div>
+                        <div class="form-group my-3">
+                            <label for="verify_token">Verify token</label>
+                            <input id="verify_token" type="text" class="form-control" formControlName="verify_token">
+                        </div>
+                        <div class="form-group my-3">
+                            <label for="token">Token</label>
+                            <textarea id="token" class="form-control" formControlName="token"></textarea>
+                        </div>
+                        
+                        <div class="modal-footer">
+                            <button type="submit" class="rounded-pill btn-outline btn-rounded border-primary px-5" [disabled]="credentialForm.invalid">
+                                submit
+                                <i class="bi bi-send-fill"></i>
+                            </button>
+                        </div>
+                </form>
+            </div>
+            <div *ngIf="responseMsg" class="modal-footer d-flex justify-content-between">
+                <div class="text-secondary">{{ responseMsg }}</div>
+                <div><button type="button" class="btn btn-outline border-danger" data-bs-dismiss="modal">Close</button></div>
+            </div>
+      </div>
+  </div>
+</div>
+
+<div class="modal fade text-dark" id="activeScenarioModal" tabindex="-1" aria-labelledby="activeScenarioModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title text-primary" id="activeScenarioModalTitle">
+                      Active Scenario
+                  </h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <form [formGroup]="activeScenarioForm" (submit)="onSubmitActiveScenarioForm()">
+                        <select formControlName="scenario" class="form-select" aria-label="Default select example">
+                            <option *ngFor="let obj of (backendScenario$ | async)?.data" [ngValue]="obj">
+                                {{ obj.title }}
+                            </option>
+                        </select>
+                            
+                        <div class="modal-footer">
+                            <button type="submit" class="rounded-pill btn-outline btn-rounded border-primary px-5" [disabled]="activeScenarioForm.invalid">
+                                Save
+                                <i class="bi bi-send-fill"></i>
+                            </button>
+                        </div>
+                  </form>
+              </div>
+              <div *ngIf="responseMsg" class="modal-footer d-flex justify-content-between">
+                  <div class="text-secondary">{{ responseMsg }}</div>
+                  <div><button type="button" class="btn btn-outline border-danger" data-bs-dismiss="modal">Close</button></div>
+              </div>
+        </div>
+    </div>
+</div>

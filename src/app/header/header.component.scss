@@ -1,0 +1,40 @@
+@use '../../sass/custom' as *;
+@use '../../sass/components/mixins' as *;
+
+.menu {
+    @include gradient;
+
+    li {
+        padding: 0 0.7rem;
+
+        a {
+            color: white !important;
+            text-transform: capitalize;
+            font-weight: 600;
+        }
+    }
+}
+
+button {
+    
+
+    a {
+        text-decoration: none;
+    }
+
+    &:hover {
+
+        a {
+            color: white;
+        }
+    }
+}
+
+span {
+
+    img {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+    }
+}
