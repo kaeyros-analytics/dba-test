@@ -24,3 +24,9 @@
 .edit-credential {
     cursor: pointer;
 }
+
+@media (max-width: 576px) {
+    #activeScenarioModal form button {
+        display: block;
+    }
+}
